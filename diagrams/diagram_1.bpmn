@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1v5zzb3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="Process_16qo3i8" name="Test&#10;" isExecutable="true" camunda:historyTimeToLive="1000">
+    <bpmn:startEvent id="Event_00jn6g5" name="Старт">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="summ" label="Сумма" type="string" defaultValue="0">
+            <camunda:validation />
+          </camunda:formField>
+          <camunda:formField id="period" label="Срок" type="string" defaultValue="0" />
+          <camunda:formField id="name" label="Имя" type="string" />
+          <camunda:formField id="phone" label="Телефон" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_07s587d</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_07s587d" sourceRef="Event_00jn6g5" targetRef="Activity_0puu43j" />
+    <bpmn:serviceTask id="Activity_0puu43j" name="Создание заявки">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="Input_0ad41od" />
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_07s587d</bpmn:incoming>
+      <bpmn:outgoing>Flow_1berl6m</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1berl6m" sourceRef="Activity_0puu43j" targetRef="Activity_0nfu48f" />
+    <bpmn:endEvent id="Event_1pem255">
+      <bpmn:incoming>Flow_0ox2kbg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ox2kbg" sourceRef="Activity_0nfu48f" targetRef="Event_1pem255" />
+    <bpmn:serviceTask id="Activity_0nfu48f" name="Отправка смс - заявка получена">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1berl6m</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ox2kbg</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_16qo3i8">
+      <bpmndi:BPMNShape id="Event_00jn6g5_di" bpmnElement="Event_00jn6g5">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="155" y="145" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05lalyv_di" bpmnElement="Activity_0puu43j">
+        <dc:Bounds x="240" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1pem255_di" bpmnElement="Event_1pem255">
+        <dc:Bounds x="662" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_10llzpn_di" bpmnElement="Activity_0nfu48f">
+        <dc:Bounds x="400" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_07s587d_di" bpmnElement="Flow_07s587d">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="240" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1berl6m_di" bpmnElement="Flow_1berl6m">
+        <di:waypoint x="340" y="120" />
+        <di:waypoint x="400" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ox2kbg_di" bpmnElement="Flow_0ox2kbg">
+        <di:waypoint x="500" y="120" />
+        <di:waypoint x="662" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
