@@ -5,21 +5,23 @@ services:
     image: camunda/camunda-bpm-platform:latest
     environment:
       - DB_DRIVER=org.postgresql.Driver
-      - DB_URL=jdbc:postgresql://postgres:5432/camunda
+      - DB_URL=jdbc:postgresql://camunda-postgres:5432/camunda
       - DB_USERNAME=camunda
       - DB_PASSWORD=camunda
-      - WAIT_FOR=postgres:5432
+      - WAIT_FOR=camunda-postgres:5432
     links:
       - camunda-postgres
     ports:
       - "8080:8080"
     restart: unless-stopped
+    depends_on:
+      - camunda-postgres
 
   camunda-postgres:
     image: postgres:15
     environment:
-      - POSTGRES_USER=camunda
-      - POSTGRES_PASSWORD=camunda
+      POSTGRES_USER: camunda
+      POSTGRES_PASSWORD: camunda
 
   postgres:
       image: postgres:15
@@ -29,3 +31,15 @@ services:
       environment:
         POSTGRES_PASSWORD: core
         POSTGRES_USER: core
+
+  front-end:
+    build:
+      context: ./fake-frontend
+      target: runner
+    volumes:
+      - ./fake-frontend:/app
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development

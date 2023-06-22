@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'camunda' => [
+        'endpoint' => env('CAMUNDA_REST_URL'),
+        'user' => env('CAMUNDA_USER'),
+        'password' => env('CAMUNDA_PASSWORD'),
+        'worker_id' => env('CAMUNDA_WORKER_ID'),
+        'fetch_max_task' => env('CAMUNDA_FETCH_MAX_TASKS')
+    ]
 ];
