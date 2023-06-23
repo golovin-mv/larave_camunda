@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1adxfp7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
   <bpmn:process id="Process_19fh5sp" name="Test Process" isExecutable="true" camunda:historyTimeToLive="100">
-    <bpmn:sequenceFlow id="Flow_10a2ylk" sourceRef="StartEvent_1" targetRef="Activity_17eryxy" />
+    <bpmn:sequenceFlow id="Flow_10a2ylk" sourceRef="loan_start" targetRef="Activity_17eryxy" />
     <bpmn:manualTask id="Activity_17eryxy" name="Заполнение паспортных данных">
       <bpmn:incoming>Flow_10a2ylk</bpmn:incoming>
       <bpmn:outgoing>Flow_0iq6z4a</bpmn:outgoing>
@@ -66,10 +66,9 @@
       <bpmn:incoming>Flow_0mhef2s</bpmn:incoming>
       <bpmn:outgoing>Flow_05edzrj</bpmn:outgoing>
     </bpmn:manualTask>
-    <bpmn:startEvent id="StartEvent_1" name="Заполнено имя" camunda:formKey="">
-      <bpmn:extensionElements />
+    <bpmn:startEvent id="loan_start" name="Заполнено имя" camunda:formKey="">
       <bpmn:outgoing>Flow_10a2ylk</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1t8y8en" messageRef="Message_02lvh66" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0pyzdq0" messageRef="Message_02lvh66" />
     </bpmn:startEvent>
   </bpmn:process>
   <bpmn:message id="Message_02lvh66" name="core_lead_created" />
@@ -120,7 +119,7 @@
       <bpmndi:BPMNShape id="Activity_0tciaf0_di" bpmnElement="Activity_11ezqq2">
         <dc:Bounds x="590" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0u8g6o0_di" bpmnElement="StartEvent_1">
+      <bpmndi:BPMNShape id="Event_0q4twjr_di" bpmnElement="loan_start">
         <dc:Bounds x="179" y="99" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="158" y="142" width="79" height="14" />

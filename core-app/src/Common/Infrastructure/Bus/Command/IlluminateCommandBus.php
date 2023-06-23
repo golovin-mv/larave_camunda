@@ -1,9 +1,9 @@
 <?php
 
-namespace Core\Common\Infrastructure\Bus;
+namespace Core\Common\Infrastructure\Bus\Command;
 
-use Core\Common\Application\Bus\Command;
-use Core\Common\Application\Bus\CommandBus;
+use Core\Common\Application\Bus\Command\Command;
+use Core\Common\Application\Bus\Command\CommandBus;
 use Illuminate\Bus\Dispatcher;
 
 class IlluminateCommandBus implements CommandBus

@@ -8,6 +8,9 @@
       <sourceFolder url="file://$MODULE_DIR$/core-app/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/core-app/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/core-app/src" isTestSource="false" packagePrefix="Core\" />
+      <sourceFolder url="file://$MODULE_DIR$/core-app/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/core/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/core/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/core/vendor/doctrine/inflector" />
@@ -221,6 +224,7 @@
       <excludeFolder url="file://$MODULE_DIR$/core-app/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/core-app/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/core-app/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/core-app/vendor/league/event" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

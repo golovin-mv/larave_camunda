@@ -15,9 +15,26 @@ class Loan extends AggregateRoot
         private readonly LoanAmount $amount,
         private readonly LoanTermInterval $interval,
         private readonly LoanId $id,
+        private Passport | null $passport = null,
     )
     {
         parent::__construct();
+    }
+
+    /**
+     * @return LoanId
+     */
+    public function getId(): LoanId
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return Passport|null
+     */
+    public function getPassport(): ?Passport
+    {
+        return $this->passport;
     }
 
     public static function createLoan(
@@ -40,6 +57,22 @@ class Loan extends AggregateRoot
         return $loan;
     }
 
+    public function editPassport(Passport | null $passport): void
+    {
+        if (!$this->status->equals(new LoanStatus(LoanStatusEnum::IN_WORK)))
+        {
+            throw new DomainException('The passport information in the application cannot be changed while it is in the status of "submitted."');
+        }
+
+        if ($this->passport && $this->passport->equals($passport))
+        {
+            return;
+        }
+
+        $this->passport = $passport;
+
+    }
+
     /**
      * @param array $data
      * @return object
@@ -48,11 +81,11 @@ class Loan extends AggregateRoot
     public static function fromArray(array $data): object
     {
         return new self(
-            new ClientName(collect(
-                    $data['firsName'],
-                    $data['lastName'],
-                    $data['middleName']
-                )
+            new ClientName(collect([
+                    'firstName' => $data['firstName'],
+                    'lastName' => $data['lastName'],
+                    'middleName' => $data['middleName']
+                ])
             ),
             new LoanAmount($data['amount']),
             LoanTermInterval::fromMonthCount($data['interval']),
@@ -61,14 +94,13 @@ class Loan extends AggregateRoot
     }
 
     /**
-     * @param object $object
      * @return array
      */
-    public function toArray(object $object): array
+    public function toArray(): array
     {
         return [
             'id' => $this->id->valueOf(),
-            'firsName' => $this->name->getFirstName(),
+            'firstName' => $this->name->getFirstName(),
             'lastName' => $this->name->getLastName(),
             'middleName' => $this->name->getMiddleName(),
             'status' => $this->status->valueOf(),

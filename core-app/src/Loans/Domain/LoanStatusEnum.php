@@ -2,10 +2,9 @@
 
 namespace Core\Loans\Domain;
 
-enum LoanStatusEnum
+enum LoanStatusEnum: string
 {
-    case IN_WORK;
-    case SCORING;
-    case DECLINE;
-    case REJECTED;
+    case IN_WORK = 'in_work';
+    case SCORING = 'scoring';
+    case REJECTED = 'rejected';
 }

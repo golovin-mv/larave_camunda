@@ -2,9 +2,6 @@
 
 namespace Core\Common\Infrastructure\Camunda;
 
-use Core\Loans\Infrastructure\Interfaces\Camunda\CheckLead\CheckLeadHandler;
-use Illuminate\Support\Facades\Log;
-
 class CamundaListener extends CamundaClient
 {
 

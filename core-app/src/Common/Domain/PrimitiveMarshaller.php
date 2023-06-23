@@ -21,5 +21,5 @@ interface PrimitiveMarshaller
      * @param object $object Экземпляр класса для сериализации.
      * @return array Массив данных, представляющий сериализованный класс.
      */
-    public function toArray(object $object): array;
+    public function toArray(): array;
 }

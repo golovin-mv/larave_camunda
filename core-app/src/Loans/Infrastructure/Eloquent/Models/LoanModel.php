@@ -4,8 +4,9 @@ namespace Core\Loans\Infrastructure\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Loan extends Model
+class LoanModel extends Model
 {
+    public $table = 'loan';
     public $incrementing = false;
     protected $keyType = 'string';
 
@@ -24,4 +25,8 @@ class Loan extends Model
         'id',
     ];
 
+    public function passport()
+    {
+        $this->hasOne(PassportModel::class, 'loan_id');
+    }
 }

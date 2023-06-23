@@ -5,6 +5,7 @@ namespace Core\Loans\Domain;
 use Core\Common\Domain\DomainException;
 use Core\Common\Domain\ValueObject\ValueObject;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 class ClientName extends ValueObject
 {
@@ -16,7 +17,7 @@ class ClientName extends ValueObject
     {
         parent::__construct($value);
         //TODO check empty string
-        if (!$value->has(['firstName, lastName'])) {
+        if (!$value->has(['firstName', 'lastName'])) {
             throw new DomainException(
                 'The client name should consist of a first name and a last name'
             );

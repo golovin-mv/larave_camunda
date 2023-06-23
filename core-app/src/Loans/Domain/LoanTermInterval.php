@@ -13,12 +13,12 @@ class LoanTermInterval
 
     public static function fromMonthCount(int $monthCount): LoanTermInterval
     {
-        return new self(new CarbonInterval("{$monthCount}M"));
+        return new self(CarbonInterval::months($monthCount));
     }
 
     public static function fromDayCount(int $dayCount): LoanTermInterval
     {
-        return  new self(new CarbonInterval("${$dayCount}D"));
+        return  new self(CarbonInterval::days($dayCount));
     }
 
     public function __toString(): string

@@ -2,7 +2,7 @@
 
 namespace Core\Loans\Application\Commands\CreateLoan;
 
-use Core\Common\Application\Bus\Command;
+use Core\Common\Application\Bus\Command\Command;
 
 class CreateLoanCommand implements Command
 {

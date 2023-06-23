@@ -10,16 +10,9 @@ namespace Core\Common\Domain\ValueObject;
  */
 abstract class ValueObject
 {
-    /**
-     * Примитивное значение
-     * @var mixed
-     */
-    private mixed $value;
 
-    public function __construct(mixed $value)
-    {
-        $this->value = $value;
-    }
+    public function __construct(protected mixed $value)
+    {}
 
     /**
      * Возвращает примитивное значение value object.

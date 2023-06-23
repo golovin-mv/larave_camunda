@@ -3,7 +3,6 @@
 namespace Core\Common\Infrastructure\Camunda;
 
 use Illuminate\Support\Collection;
-use function Termwind\renderUsing;
 
 /**
  * TODO добавить конфигурацию для топика

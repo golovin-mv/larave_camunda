@@ -6,8 +6,10 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
+/**
+ * TODO interface
+ */
 class CamundaClient
 {
     private PendingRequest $restClient;
@@ -31,7 +33,19 @@ class CamundaClient
             'workerId' => config('services.camunda.worker_id'),
             'variables' => $variables,
         ]);
-        Log::channel('develop')->info($response);
+    }
+    //TODO add variables
+    public final function message(
+        string $messageName,
+        mixed $businessKey
+    )
+    {
+        $response = $this->restClient->post('/message', [
+            'messageName' => $messageName,
+            'businessKey' => $businessKey,
+        ]);
+
+        return $response;
     }
 
     // TODO разобраться почему не лочит таски

@@ -3,8 +3,9 @@
 namespace Core\Loans\Infrastructure\Interfaces\Http;
 
 use App\Http\Controllers\Controller;
-use Core\Common\Application\Bus\CommandBus;
+use Core\Common\Application\Bus\Command\CommandBus;
 use Core\Loans\Application\Commands\CreateLoan\CreateLoanCommand;
+use Core\Loans\Application\Commands\EditPassport\EditPassportCommand;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -14,7 +15,7 @@ class LoanController extends Controller
     )
     {}
 
-    public function createLoan(Request $request)
+    public function createLoan(Request $request): void
     {
         $this->bus->dispatch(
             new CreateLoanCommand(
@@ -23,6 +24,16 @@ class LoanController extends Controller
                 $request->input('middleName'),
                 $request->input('amount'),
                 $request->input('interval'),
+            )
+        );
+    }
+
+    public function editLoanPassport(Request $request)
+    {
+        $this->bus->dispatch(
+            new EditPassportCommand(
+                $request->input('id'),
+                $request->input('number'),
             )
         );
     }
