@@ -31,15 +31,3 @@ services:
       environment:
         POSTGRES_PASSWORD: core
         POSTGRES_USER: core
-
-#  front-end:
-#    build:
-#      context: ./fake-frontend'
-#      target: runner
-#    volumes:
-#      - ./fake-frontend:/app
-#    command: npm run dev
-#    ports:
-#      - "3000:3000"
-#    environment:
-#      NODE_ENV: development

@@ -16,8 +16,6 @@ class CamundaServiceProvider extends ServiceProvider
             return new CamundaTaskHandlersManager();
         });
 
-        require __DIR__.'/listeners.php';
-
         $this->commands($this->commands);
     }
 }

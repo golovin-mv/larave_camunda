@@ -8,6 +8,7 @@ use Core\Common\Domain\DomainException;
 use Core\Loans\Domain\LoanId;
 use Core\Loans\Domain\LoanRepository;
 use Core\Loans\Domain\Passport;
+use Illuminate\Support\Facades\DB;
 
 class EditPassportCommandHandler implements CommandHandler
 {
@@ -20,19 +21,20 @@ class EditPassportCommandHandler implements CommandHandler
     /**
      * @param EditPassportCommand $command
      * @return void
-     * @throws DomainException
      */
     public function handle(EditPassportCommand $command): void
     {
-        $loan = $this->repository->getById(
-            new LoanId($command->loanId),
-        );
+        DB::transaction(function () use ($command) {
+            $loan = $this->repository->getById(
+                new LoanId($command->loanId),
+            );
 
-        $loan->editPassport(
-            new Passport($command->passportNumber)
-        );
+            $loan->editPassport(
+                Passport::fromSeriesAndNumberString($command->passportNumber)
+            );
 
-        $this->repository->save($loan);
-        $this->bus->publish($loan->pullEvents()->toArray());
+            $this->repository->save($loan);
+            $this->bus->publish($loan->pullEvents()->toArray());
+        });
     }
 }

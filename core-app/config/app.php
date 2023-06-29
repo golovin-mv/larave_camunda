@@ -171,6 +171,7 @@ return [
         Core\Common\Infrastructure\Camunda\CamundaServiceProvider::class,
         Core\Common\Infrastructure\Bus\BusServiceProvider::class,
         Core\Loans\LoanServiceProvider::class,
+        Core\Scoring\ScoringServiceProvider::class,
     ])->toArray(),
 
     /*

@@ -2,6 +2,8 @@
 
 namespace Core\Common\Infrastructure\Camunda;
 
+use Illuminate\Support\Facades\Log;
+
 class CamundaListener extends CamundaClient
 {
 

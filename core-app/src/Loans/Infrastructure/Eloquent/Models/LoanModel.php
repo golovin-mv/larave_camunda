@@ -3,17 +3,15 @@
 namespace Core\Loans\Infrastructure\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class LoanModel extends Model
 {
     public $table = 'loan';
-    public $incrementing = false;
-    protected $keyType = 'string';
 
-    /**
-     * @param array $fillable
-     * @return $this
-     */
+    public $incrementing = false;
+
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'firstName',
@@ -25,8 +23,16 @@ class LoanModel extends Model
         'id',
     ];
 
-    public function passport()
+    /**
+     * @return HasOne
+     */
+    public function passport(): HasOne
     {
-        $this->hasOne(PassportModel::class, 'loan_id');
+        return $this->hasOne(PassportModel::class, 'loanId');
+    }
+
+    public function address(): HasOne
+    {
+        return $this->hasOne(AddressModel::class, 'loanId');
     }
 }

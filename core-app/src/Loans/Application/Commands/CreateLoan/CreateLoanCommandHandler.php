@@ -25,7 +25,7 @@ class CreateLoanCommandHandler implements CommandHandler
      * @return void
      * @throws DomainException
      */
-    public function handle(CreateLoanCommand $command): void
+    public function handle(CreateLoanCommand $command): Loan
     {
         $loan = Loan::createLoan(
             new ClientName(collect([
@@ -41,5 +41,7 @@ class CreateLoanCommandHandler implements CommandHandler
         $this->repository->save($loan);
 
         $this->eventBus->publish($loan->pullEvents()->toArray());
+
+        return $loan;
     }
 }

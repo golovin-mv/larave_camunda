@@ -7,4 +7,5 @@ interface LoanRepository
     public function getNextId(): LoanId;
     public function save(Loan $loan): Loan;
     public function getById(LoanId $id): Loan;
+    public function nextAddressId(): AddressId;
 }

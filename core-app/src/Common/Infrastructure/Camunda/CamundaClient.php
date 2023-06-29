@@ -6,6 +6,7 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 /**
  * TODO interface
@@ -26,24 +27,56 @@ class CamundaClient
     //TODO collection to class
     public final function completeTask(
         string $taskId,
-        Collection $variables=null
+        array $variables = null
     ): void
     {
-        $response = $this->restClient->post("/external-task/{$taskId}/complete", [
+        $parameters = [
             'workerId' => config('services.camunda.worker_id'),
             'variables' => $variables,
-        ]);
+        ];
+
+        if ($variables)
+        {
+            $parameters['variables'] = array_reduce($variables, function ($acc, CamundaVariable $el) {
+                $acc[$el->name] = [
+                    'value' => $el->value,
+                ];
+                return $acc;
+            }, []);
+        }
+
+        $response = $this->restClient->post("/external-task/{$taskId}/complete", $parameters);
     }
-    //TODO add variables
+
+    /**
+     * @param string $messageName
+     * @param mixed $businessKey
+     * @param array<CamundaVariable> $variables
+     * @return \GuzzleHttp\Promise\PromiseInterface|Response
+     */
     public final function message(
         string $messageName,
-        mixed $businessKey
+        mixed $businessKey,
+        array $variables = null,
     )
     {
-        $response = $this->restClient->post('/message', [
+        $parameters =  [
             'messageName' => $messageName,
             'businessKey' => $businessKey,
-        ]);
+        ];
+
+        if ($variables)
+        {
+            $parameters['processVariables'] = array_reduce($variables, function ($acc, CamundaVariable $el) {
+                $acc[$el->name] = [
+                    'value' => $el->value,
+                    'type' => $el->type->value,
+                ];
+                return $acc;
+            }, []);
+        }
+
+        $response = $this->restClient->post('/message', $parameters);
 
         return $response;
     }

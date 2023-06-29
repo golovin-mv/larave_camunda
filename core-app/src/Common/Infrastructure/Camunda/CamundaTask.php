@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 class CamundaTask{
     /**
      * @param string $id
+     * @param mixed $businessKey
      * @param string $topicName
      * @param string $workerId
      * @param Collection $variables
@@ -15,6 +16,7 @@ class CamundaTask{
      */
     public function __construct(
         private readonly string $id,
+        private readonly mixed $businessKey,
         private readonly string $topicName,
         private readonly string $workerId,
         private readonly Collection $variables,
@@ -28,6 +30,14 @@ class CamundaTask{
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBusinessKey(): mixed
+    {
+        return $this->businessKey;
     }
 
     /**
@@ -66,6 +76,7 @@ class CamundaTask{
     {
         return new CamundaTask(
             $rawTask->get('id'),
+            $rawTask->get('businessKey'),
             $rawTask->get('topicName'),
             $rawTask->get('workerId'),
             collect($rawTask->get('variables')),

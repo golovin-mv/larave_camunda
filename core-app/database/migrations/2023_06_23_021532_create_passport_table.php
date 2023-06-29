@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('number');
             $table->string('series');
             $table->foreignUuid('loanId')->references('id')->on('loan')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

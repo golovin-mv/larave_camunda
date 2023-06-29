@@ -10,9 +10,9 @@ class IlluminateCommandBus implements CommandBus
 {
     public function __construct(private Dispatcher $bus) {}
 
-    public function dispatch(Command $command): void
+    public function dispatch(Command $command): mixed
     {
-        $this->bus->dispatch($command);
+        return $this->bus->dispatch($command);
     }
 
     /**

@@ -39,7 +39,7 @@ abstract class ValueObject
 
     public function __toString(): string
     {
-        return "{getClassName()}[value={$this->value}]";
+        return static::class."[value={$this->value}]";
     }
 
 }

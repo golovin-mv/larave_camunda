@@ -5,24 +5,34 @@ namespace Core\Loans\Domain;
 use Core\Common\Domain\DomainException;
 use Core\Common\Domain\ValueObject\ValueObject;
 
-class Passport extends ValueObject
+//TODO to nullable
+class Passport
 {
-    private string $series;
-    private string $number;
+    public function __construct(
+        private readonly string $series,
+        private readonly string $number,
+    )
+    {}
 
-    public function __construct(string $passportNumber)
+    public static function fromSeriesAndNumberString(string $passportNumber): Passport
     {
         if (!preg_match('/^\d{4}\s\d{6}$/m', $passportNumber))
         {
             throw new DomainException('The passport number should be in the format 0000 000000.');
         }
-        parent::__construct($passportNumber);
 
         $explodedNumber = explode(" ", $passportNumber);
 
-        $this->series = $explodedNumber[0];
-        $this->number = $explodedNumber[1];
+        return new self($explodedNumber[0], $explodedNumber[1]);
     }
+
+    public function equals(Passport $other): bool
+    {
+        return
+            $this->series === $other->series
+            && $this->number === $other->number;
+    }
+
 
     /**
      * @return string
